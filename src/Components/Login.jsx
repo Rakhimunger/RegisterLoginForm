@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const navigate = useNavigate(); // Hook for navigation
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +29,7 @@ const LoginForm = () => {
         setSuccess("Login successful!");
         setEmail("");
         setPassword("");
+        navigate("/dashboard"); // Redirect after login
       } else {
         setError(data.message || "Login failed");
       }
@@ -65,6 +68,17 @@ const LoginForm = () => {
             Login
           </button>
         </form>
+
+        {/* Register Button */}
+        <p className="text-center mt-4 text-gray-700">
+          Don't have an account?{" "}
+          <button
+            onClick={() => navigate("/register")}
+            className="text-blue-500 hover:underline"
+          >
+            Register
+          </button>
+        </p>
       </div>
     </div>
   );
